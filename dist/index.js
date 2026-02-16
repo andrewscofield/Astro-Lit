@@ -13,7 +13,7 @@ function getViteConfiguration() {
       exclude: ["@semantic-ui/astro-lit/server.js"]
     },
     ssr: {
-      external: ]
+      external: []
     }
   };
 }
