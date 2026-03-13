@@ -36,9 +36,8 @@ export default function (): AstroIntegration {
 					'head-inline',
 					readFileSync(new URL('../client-shim.min.js', import.meta.url), { encoding: 'utf-8' })
 				);
-				// Inject the hydration support, using 'page' instead of 'before-hydration'
-				// to work around Astro 6 not emitting before-hydration chunks for the client build
-				injectScript('page', `import '@semantic-ui/astro-lit/hydration-support.js';`);
+				// Inject the hydration code, before a component is hydrated.
+				injectScript('before-hydration', `import '@semantic-ui/astro-lit/hydration-support.js';`);
 				// Add the lit renderer so that Astro can understand lit components.
 				addRenderer({
 					name: '@semantic-ui/astro-lit',
