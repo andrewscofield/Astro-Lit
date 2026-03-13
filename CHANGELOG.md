@@ -1,10 +1,10 @@
 
-## 5.1.1
+## 5.1.2
 
 ### Bugs
 - Fix hydration support not loading in Astro 6 static builds. Astro 6 does not emit `before-hydration` chunks for the client build environment, causing a 404 and breaking Lit component hydration. Switches to `page` script injection as a workaround.
 
-## 5.1.0
+## 5.1.0-1
 
 ### Bugs
 - Adds new independent build system for project, fixes issues is 5.0.1-2 related to build system failure conditions.
