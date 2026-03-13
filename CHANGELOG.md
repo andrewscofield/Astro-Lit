@@ -1,8 +1,13 @@
 
+## 5.1.3
+
+### Bugs
+- Reverts 5.1.2 workaround back to `before-hydration` injection. The underlying issue is an [Astro 6 bug](https://github.com/withastro/astro/pull/15904) where the before-hydration chunk is not emitted for the client build. Use 5.1.0 if you are on Astro 5. If you are on Astro 6, this version requires the Astro fix from the linked PR — until that merges, pin to 5.1.2.
+
 ## 5.1.2
 
 ### Bugs
-- Fix hydration support not loading in Astro 6 static builds. Astro 6 does not emit `before-hydration` chunks for the client build environment, causing a 404 and breaking Lit component hydration. Switches to `page` script injection as a workaround.
+- Workaround for hydration support not loading in Astro 6 static builds due to a [missing chunk in Astro's client build](https://github.com/withastro/astro/pull/15904). Switches to `page` script injection which fixes the 404 but does not guarantee execution order relative to island hydration, so components may occasionally re-render on first load. Use 5.1.3 once the Astro fix lands.
 
 ## 5.1.0-1
 
