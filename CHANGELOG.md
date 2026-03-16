@@ -1,4 +1,9 @@
 
+## 5.3.0
+
+### Changes
+- This reverts to using `before-hydration` from `5.1.x` releases. Astro 6 has landed `before-hydration` fix in [6.0.5](https://github.com/withastro/astro/releases/tag/astro%406.0.5), and this should be stable in older versions of Astro 5.
+
 ## 5.2.0
 
 ### Changes
