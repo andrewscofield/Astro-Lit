@@ -1,4 +1,13 @@
 
+## 5.2.0
+
+### Changes
+- Inline hydration support as a blocking script instead of using Astro's `before-hydration` or `page` injection. While debugging SSR hydration issues we discovered two separate bugs:
+  1. Astro 6 doesn't emit the `before-hydration` chunk for the client build environment, causing a 404. We [contributed a fix](https://github.com/withastro/astro/pull/15904) upstream which has been merged.
+  2. Even with the Astro fix, `before-hydration` loads as a module script which can race with other module scripts that import lit-element. If lit-element evaluates first, `globalThis.litElementHydrateSupport` isn't set yet and the hydration patches are never applied, causing intermittent duplicate rendering.
+
+  This release bundles the hydration support (~13KB) and inlines it via `head-inline` as a classic blocking script, guaranteeing it executes before any module scripts.
+
 ## 5.1.3
 
 ### Bugs

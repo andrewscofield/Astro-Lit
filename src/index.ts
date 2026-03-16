@@ -36,8 +36,14 @@ export default function (): AstroIntegration {
 					'head-inline',
 					readFileSync(new URL('../client-shim.min.js', import.meta.url), { encoding: 'utf-8' })
 				);
-				// Inject the hydration code, before a component is hydrated.
-				injectScript('before-hydration', `import '@semantic-ui/astro-lit/hydration-support.js';`);
+				// Inject hydration support as a blocking script to guarantee it runs
+				// before any module scripts can load lit-element. This avoids a race
+				// condition where lit-element evaluates before the hydration patches
+				// are registered on globalThis.litElementHydrateSupport.
+				injectScript(
+					'head-inline',
+					readFileSync(new URL('../hydration-support.min.js', import.meta.url), { encoding: 'utf-8' })
+				);
 				// Add the lit renderer so that Astro can understand lit components.
 				addRenderer({
 					name: '@semantic-ui/astro-lit',

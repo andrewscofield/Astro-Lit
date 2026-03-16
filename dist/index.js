@@ -32,7 +32,10 @@ function index_default() {
           "head-inline",
           readFileSync(new URL("../client-shim.min.js", import.meta.url), { encoding: "utf-8" })
         );
-        injectScript("before-hydration", `import '@semantic-ui/astro-lit/hydration-support.js';`);
+        injectScript(
+          "head-inline",
+          readFileSync(new URL("../hydration-support.min.js", import.meta.url), { encoding: "utf-8" })
+        );
         addRenderer({
           name: "@semantic-ui/astro-lit",
           serverEntrypoint: "@semantic-ui/astro-lit/server.js",
