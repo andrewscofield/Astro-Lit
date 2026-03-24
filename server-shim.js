@@ -1,4 +1,4 @@
-import { customElements as litCE, HTMLElement as litShimHTMLElement } from '@lit-labs/ssr-dom-shim';
+import { customElements as litCE, HTMLElement as litShimHTMLElement, CSSStyleSheet as litCSSStyleSheet } from '@lit-labs/ssr-dom-shim';
 
 // Minimal DOM Shim for Cloudflare/SSR
 if (!globalThis.window) {
@@ -16,6 +16,10 @@ if (!globalThis.document) {
 		createTreeWalker() { return { nextNode: () => null, currentNode: null } },
 		location: { href: '' },
 	};
+}
+
+if (!globalThis.CSSStyleSheet) {
+	globalThis.CSSStyleSheet = litCSSStyleSheet;
 }
 
 // Something at build time injects document.currentScript = undefined instead of
