@@ -14,7 +14,10 @@
   ],
   "homepage": "https://docs.astro.build/en/guides/integrations-guide/lit/",
   "exports": {
-    ".": "./dist/index.js",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
     "./server.js": {
       "types": "./server.d.ts",
       "default": "./server.js"
@@ -36,7 +39,7 @@
   "scripts": {
     "build": "npm run build:js && npm run build:types && npm run build:minify",
     "build:js": "esbuild src/index.ts src/client.ts --format=esm --bundle --platform=node --outdir=dist",
-    "build:types": "tsc src/client.ts --declaration --emitDeclarationOnly --skipLibCheck --outDir ./dist",
+    "build:types": "tsc src/index.ts src/client.ts --declaration --emitDeclarationOnly --skipLibCheck --outDir ./dist",
     "build:minify": "esbuild client-shim.js --minify --outfile=client-shim.min.js",
     "dev": "npm run build -- --watch",
     "test": "node test/server.test.js && node test/sass.test.js",
