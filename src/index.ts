@@ -1,6 +1,16 @@
 import { readFileSync } from 'node:fs'
 import type { AstroIntegration, ContainerRenderer } from 'astro'
 
+const LIT_SSR_PACKAGES = [
+  'lit',
+  'lit/decorators.js',
+  'lit-element',
+  '@lit/reactive-element',
+  '@lit-labs/ssr',
+  '@lit-labs/ssr-dom-shim',
+  '@semantic-ui/astro-lit',
+] as const
+
 function getViteConfiguration() {
   return {
     optimizeDeps: {
@@ -14,12 +24,10 @@ function getViteConfiguration() {
       exclude: ['@semantic-ui/astro-lit/server.js'],
     },
     ssr: {
-      external: [
-        'lit-element',
-        '@lit-labs/ssr',
-        '@semantic-ui/astro-lit',
-        'lit/decorators.js',
-      ],
+      optimizeDeps: {
+        exclude: [...LIT_SSR_PACKAGES],
+      },
+      external: [...LIT_SSR_PACKAGES],
     },
   }
 }
